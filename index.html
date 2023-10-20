@@ -7,8 +7,12 @@
 
     <style>
       body {
+        color: #0f0;
+        font-family: "Arial", sans-serif;
+        text-align: center;
         margin: 0;
         padding: 0;
+        overflow: hidden;
         background-image: url("images/background.gif");
         background-size: cover; /* Adjust to your preference */
         background-repeat: no-repeat;
@@ -17,9 +21,66 @@
         position: absolute;
         background-size: auto;
       }
+      
+      @keyframes flicker {
+        0% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
 
+      h1 {
+        font-size: 4em;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin: 100px 0;
+        animation: flicker 1s infinite alternate;
+      }
+
+      .neon-text {
+        font-size: 5em;
+        font-weight: bold;
+        color: #0f0;
+        text-transform: uppercase;
+        text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+        animation: glow 1s linear infinite;
+      }
+
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+        }
+        50% {
+          text-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0;
+        }
+        100% {
+          text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+        }
+      }
+
+        .futuristic-button {
+          background: linear-gradient(45deg, #2e71ff, #45b0ff);
+          border: none;
+          border-radius: 30px;
+          color: #fff;
+          cursor: pointer;
+          font-size: 18px;
+          padding: 15px 30px;
+          transition: background 0.3s, transform 0.2s;
+        }
+
+        .futuristic-button:hover {
+          background: linear-gradient(45deg, #45b0ff, #2e71ff);
+          transform: scale(1.05);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
     </style>
   </head>
-    <img src = "images/Aim Training Text.jpg" class = "aimTraining">
+  <body>
+    <div class="neon-text">Aim</div>
+    <div class="neon-text">Training</div>
+    <button class="futuristic-button">Click Me</button>
   </body>
 </html>
