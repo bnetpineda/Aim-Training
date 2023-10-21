@@ -5,16 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style type="text/css">
-      #center {
+      #button {
         position: absolute;
         top: 50%;
         left: 50%;
+        border-radius: 50%;
       }
 
       img {
         width: 100px; /* Make the image take up the entire container initially */
         height: auto; /* Maintain aspect ratio while growing */
         animation: fadeOut 3s forwards; /* Call the keyframes animation */
+      }
+      div.points {
+        font-size: xx-large;
+        position: absolute;
+        top: 15%;
+        left: 5%;
+        background-color: #000;
+        font-family: "Press Start 2P", cursive;
+        color: #0f0; /* Set text color to green */
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        text-shadow: 3px 3px 0 #f00;
       }
 
       @keyframes fadeOut {
@@ -41,22 +54,35 @@
     </style>
   </head>
   <body>
-    <div id="center">
-        <!-- Image will be inserted here -->
-      </div>
-      <script>
-        function changePosition() {
-          const myElement = document.getElementById("center");
-          const randomInt = Math.floor(Math.random() * 80) + 10;
-          myElement.style.left = randomInt + "%";
-  
-          const imgElement = document.createElement("img");
-          imgElement.src = "images/dot.png"; 
-          myElement.innerHTML = ''; 
-          myElement.appendChild(imgElement);
-        }
-  
-        setInterval(changePosition, 500);
-      </script>
+    <button id="button">
+      <!-- Image will be inserted here -->
+    </button>
+    <div id="points" class="points"></div>
+    <script>
+      let points = 0;
+      document.getElementById("points").textContent = "Points: " + points;
+
+      function changePosition() {
+        const myElement = document.getElementById("button");
+        const randomInt = Math.floor(Math.random() * 80) + 10;
+        myElement.style.left = randomInt + "%";
+
+        const imgElement = document.createElement("img");
+        imgElement.src = "images/dot.png";
+        myElement.innerHTML = "";
+        myElement.appendChild(imgElement);
+      }
+
+      function click() {
+        const buttonElement = document.getElementById("button");
+        buttonElement.addEventListener("click", function () {
+          points += 1;
+          document.getElementById("points").textContent = "Points: " + points;
+          document.getElementById("points").textContent = "Points: " + points;
+        });
+      }
+      setInterval(changePosition, 1000);
+      click();
+    </script>
   </body>
 </html>
