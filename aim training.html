@@ -1,88 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style type="text/css">
-      #button {
+    <style>
+      body {
+        background-color: grey;
+      }
+      #image-container {
         position: absolute;
-        top: 50%;
         left: 50%;
-        border-radius: 50%;
+        top: 40%;
       }
 
-      img {
-        width: 100px; /* Make the image take up the entire container initially */
-        height: auto; /* Maintain aspect ratio while growing */
-        animation: fadeOut 3s forwards; /* Call the keyframes animation */
+      #image {
+        display: none;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
       }
-      div.points {
-        font-size: xx-large;
-        position: absolute;
-        top: 15%;
-        left: 5%;
-        background-color: #000;
-        font-family: "Press Start 2P", cursive;
-        color: #0f0; /* Set text color to green */
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        text-shadow: 3px 3px 0 #f00;
-      }
-
       @keyframes fadeOut {
         0% {
           transform: scale(1);
-        }
-        40% {
-          transform: scale(2);
-        }
-        60% {
-          transform: scale(2);
-          opacity: 0%;
-        }
-        80% {
-          transform: scale(2);
-          opacity: 0%;
+          opacity: 1;
         }
         100% {
           transform: scale(2);
-          pointer-events: none;
-          opacity: 0%;
+          opacity: 0;
         }
+      }
+      #points {
+        font-family: "Press Start 2P", cursive; /* You can use a pixel-style font like "Press Start 2P" */
+        font-size: 50px; /* Adjust the font size as needed */
+        color: #ffd700; /* Text color, you can change this */
+        text-shadow: 2px 2px 4px #000; /* Add a subtle shadow to the text */
+        text-transform: uppercase; /* Convert text to uppercase for a gamey look */
+        letter-spacing: 2px; /* Adjust letter spacing for better readability */
+      }
+      .button {
+        background: none;
+        border: none;
+        padding: 0;
+        left: 45%;
+        cursor: pointer;
+        position: absolute;
+        font-family: "Press Start 2P", cursive; /* You can use a pixel-style font like "Press Start 2P" */
+        font-size: 50px; /* Adjust the font size as needed */
+        color: #ffd700; /* Text color, you can change this */
+        text-shadow: 2px 2px 4px #000; /* Add a subtle shadow to the text */
+        text-transform: uppercase; /* Convert text to uppercase for a gamey look */
+        letter-spacing: 10px; /* Adjust letter spacing for better readability */
       }
     </style>
   </head>
   <body>
-    <button id="button">
-      <!-- Image will be inserted here -->
+    <div id="image-container">
+      <img
+        id="image"
+        src="/Aim Training/images/dot.png"
+        alt="Click to remove"
+        draggable="false"
+      />
+    </div>
+    <button class="button" onclick='button("easy")' style="top: 400px">
+      Easy
     </button>
-    <div id="points" class="points"></div>
+    <button class="button" onclick='button("normal")' style="top: 500px">
+      Normal
+    </button>
+    <button class="button" onclick='button("hard")' style="top: 600px">
+      Hard
+    </button>
+    <div id="points"></div>
+
     <script>
       let points = 0;
+      let difficulty,
+        start = false;
       document.getElementById("points").textContent = "Points: " + points;
 
-      function changePosition() {
-        const myElement = document.getElementById("button");
-        const randomInt = Math.floor(Math.random() * 80) + 10;
-        myElement.style.left = randomInt + "%";
+      function button(difficulty) {
+        if (difficulty == "easy") {
+          difficulty = 3;
+        } else if (difficulty == "normal") {
+          difficulty = 2;
+        } else if (difficulty == "hard") {
+          difficulty = 1;
+        }
 
-        const imgElement = document.createElement("img");
-        imgElement.src = "images/dot.png";
-        myElement.innerHTML = "";
-        myElement.appendChild(imgElement);
+        document
+          .querySelectorAll(".button")
+          .forEach((button) => button.remove());
+
+        const textElement = document.getElementById("textRemove");
+        if (textElement) {
+          textElement.innerHTML = "";
+        }
+        setInterval(function () {
+          addImage(difficulty);
+        }, difficulty * 900);
       }
 
-      function click() {
-        const buttonElement = document.getElementById("button");
-        buttonElement.addEventListener("click", function () {
-          points += 1;
-          document.getElementById("points").textContent = "Points: " + points;
-          document.getElementById("points").textContent = "Points: " + points;
-        });
+      difficulty = 1;
+      function addImage(difficulty) {
+        let randNum = Math.floor(Math.random() * 80) + 10;
+        document.getElementById("image-container").style.left = randNum + "%";
+        document.getElementById("image").style.display = "block";
+        document.getElementById("image").style.animation =
+          "fadeOut " + difficulty * 900 + "ms forwards";
+        setTimeout(() => {
+          document.getElementById("image").style.display = "none";
+        }, 850 * difficulty);
       }
-      setInterval(changePosition, 1000);
-      click();
+
+      function removeImage() {
+        document.getElementById("image").style.display = "none";
+        points += 1;
+        document.getElementById("points").textContent = "Points: " + points;
+      }
+
+      document.getElementById("image").addEventListener("click", removeImage);
     </script>
   </body>
 </html>
