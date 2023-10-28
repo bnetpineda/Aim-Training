@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aim Training</title>
+    <link rel="stylesheet" type="text/css" href="aimTraining.css" />
+  </head>
+  <body>
+    <div id="image-container">
+      <img
+        id="image"
+        src="/Aim Training/images/dot.png"
+        alt="Click to remove"
+        draggable="false"
+      />
+    </div>
+    <button class="button" id="goBackButton" style="top: 225px; left: 875px">
+      <img src="images/back.png" width="100" />
+    </button>
+    <div class="button" style="top: 300px">Difficulty</div>
+    <button class="button" onclick='button("easy")' style="top: 400px">
+      Easy
+    </button>
+    <button class="button" onclick='button("normal")' style="top: 500px">
+      Normal
+    </button>
+    <button class="button" onclick='button("hard")' style="top: 600px">
+      Hard
+    </button>
+    <div id="points"></div>
+    <div id="timer" style="top: 35px;"></div>
+    <div id="totalScore" style="top: 50%; left: 30%;"></div>
+
+    <script src="aimTraining.js"></script>
+  </body>
+</html>
