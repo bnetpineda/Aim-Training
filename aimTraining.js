@@ -4,22 +4,6 @@ let difficulty,
   start = false,
   time = 5;
 
-function buttonMode(gameMode) {
-  if (gameMode === "horizontalShot") {
-    gameMode = "horizontalShot";
-  } else if (gameMode === "spiderShot") {
-    gameMode = "spiderShot";
-  }
-  document
-    .querySelectorAll(".button")
-    .forEach((buttonMode) => buttonMode.remove());
-
-  const textElement = document.getElementById("textRemove");
-  if (textElement) {
-    textElement.innerHTML = "";
-  }
-}
-
 function button(difficulty) {
   let spiderTrue = false;
 
@@ -120,7 +104,7 @@ function removeImage() {
   updateTimer();
 }
 
-document.getElementById("image").addEventListener("click", removeImage);
+document.getElementById("image-container").addEventListener("click", removeImage);
 document.getElementById("goBackButton").addEventListener("click", function () {
   window.history.back();
 });

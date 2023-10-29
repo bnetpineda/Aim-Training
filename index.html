@@ -23,6 +23,22 @@
       Spider Shot
     </a>
 
-    <script src="aimTraining.js"></script>
+    <script>
+      function buttonMode(gameMode) {
+        if (gameMode === "horizontalShot") {
+          gameMode = "horizontalShot";
+        } else if (gameMode === "spiderShot") {
+          gameMode = "spiderShot";
+        }
+        document
+          .querySelectorAll(".button")
+          .forEach((buttonMode) => buttonMode.remove());
+      
+        const textElement = document.getElementById("textRemove");
+        if (textElement) {
+          textElement.innerHTML = "";
+        }
+      }
+    </script>
   </body>
 </html>
